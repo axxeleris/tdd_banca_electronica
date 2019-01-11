@@ -4,7 +4,7 @@ import com.pe.tdd.domain.CreditCard;
 
 public class CreditCardRepository {
 	
-	public CreditCard updateNip(int nip) {
+	public CreditCard updateNip(String nip) {
 		return null;
 	}
 }

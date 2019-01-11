@@ -1,16 +1,16 @@
 package com.pe.tdd.domain;
 
 public class CreditCard {
-	private int NIP;
+	private String NIP;
 	private int number;
 	private double balance;
 	private User owner;
 	
-	public int getNIP() {
+	public String getNIP() {
 		return NIP;
 	}
 	
-	public void setNIP(int _NIP) {
+	public void setNIP(String _NIP) {
 		NIP = _NIP;
 	}
 	

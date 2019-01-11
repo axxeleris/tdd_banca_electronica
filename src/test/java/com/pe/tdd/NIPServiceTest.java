@@ -16,7 +16,7 @@ import com.pe.tdd.service.CreditCardService;
 
 public class NIPServiceTest {
 
-	private static int fourDigitNIP = 1234;
+	private static String fourDigitNIP = "1234";
 	private static CreditCard expectedCreditCardNIPChange;
 	
     @BeforeClass 
@@ -30,7 +30,7 @@ public class NIPServiceTest {
 		CreditCardRepository mockCreditCardRepository = mock(CreditCardRepository.class);
 		CreditCardService cardService = new CreditCardService(mockCreditCardRepository);
 		
-		when(mockCreditCardRepository.updateNip(Mockito.anyInt()))
+		when(mockCreditCardRepository.updateNip(Mockito.anyString()))
 						.thenReturn(expectedCreditCardNIPChange);
 		
 		CreditCard changedNIP = cardService.updateNip(fourDigitNIP, fourDigitNIP);
@@ -38,26 +38,28 @@ public class NIPServiceTest {
 		
 	}
 
-	@Test(expected = NIPUpdateException.class)
-	public void shouldNotChangeNIPWhenConfirmIsIncorrect() {		
+	@Test(expected = NIPUpdateException.class) 
+	public void shouldNotChangeNIPWhenConfirmIsIncorrect() { 
 		CreditCardRepository mockCreditCardRepository = mock(CreditCardRepository.class);
-		CreditCardService cardService = new CreditCardService(mockCreditCardRepository);
-		
-		when(mockCreditCardRepository.updateNip(Mockito.anyInt()))
-						.thenReturn(expectedCreditCardNIPChange);
-		
-		cardService.updateNip(fourDigitNIP, fourDigitNIP + 1);
-	}
+		CreditCardService cardService = new
+		CreditCardService(mockCreditCardRepository);
+		  
+		when(mockCreditCardRepository.updateNip(Mockito.anyString()))
+				.thenReturn(expectedCreditCardNIPChange);
+		  
+	    cardService.updateNip(fourDigitNIP, fourDigitNIP.concat("1")); 
+    }
 	
-	@Test(expected = NIPUpdateMissingCharactersException.class)
-	public void shouldNotChangeNIPWhenLessThanFourDigitsGiven() {		
-		int threeDigitNIP = 123;
-		CreditCardRepository mockCreditCardRepository = mock(CreditCardRepository.class);
-		CreditCardService cardService = new CreditCardService(mockCreditCardRepository);
-		
-		when(mockCreditCardRepository.updateNip(Mockito.anyInt()))
-						.thenReturn(expectedCreditCardNIPChange);
-		
-		cardService.updateNip(threeDigitNIP, fourDigitNIP);
-	}
+	@Test(expected = NIPUpdateMissingCharactersException.class) 
+	public void shouldNotChangeNIPWhenLessThanFourDigitsGiven() { 
+		String threeDigitNIP = "123";
+		CreditCardRepository mockCreditCardRepository = mock(CreditCardRepository.class); 
+		  CreditCardService cardService = new CreditCardService(mockCreditCardRepository);
+		  
+		  when(mockCreditCardRepository.updateNip(Mockito.anyString()))
+		  .thenReturn(expectedCreditCardNIPChange);
+		  
+		  cardService.updateNip(threeDigitNIP, fourDigitNIP); 
+	  }
+	 
 }

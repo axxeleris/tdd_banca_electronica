@@ -13,8 +13,8 @@ public class CreditCardService {
 		this.creditCardRepository = creditCardRepository;
 	}
 	
-	public CreditCard updateNip(int nip, int nipConfirm) {
-		if(nip < 4) {
+	public CreditCard updateNip(String nip, String nipConfirm) {
+		if(nip.length() < 4) {
 			throw new NIPUpdateMissingCharactersException();
 		}
 		if(nip == nipConfirm) {
