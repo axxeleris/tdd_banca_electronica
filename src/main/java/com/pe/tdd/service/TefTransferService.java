@@ -5,6 +5,7 @@ import com.pe.tdd.domain.TefTransfer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class TefTransferService {
 
@@ -22,6 +23,11 @@ public class TefTransferService {
             throw new IllegalArgumentException("El monto no debe superar los $5000.00 Pesos");
         }
 
-        return new TefTransfer("12345678");
+        return new TefTransfer(
+                "12345678",
+                LocalDate.now().plusDays(1)
+        );
     }
+
+
 }

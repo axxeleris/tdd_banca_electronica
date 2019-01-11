@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,7 +32,10 @@ public class TefTransferServiceTest {
                 BigDecimal.valueOf(500)
         );
 
+        LocalDate nextDay = LocalDate.now().plusDays(1);
+
         assertTrue(StringUtils.isEmpty(tefTransfer.getAuthorizationCode()) == false);
+        assertTrue(tefTransfer.getOperationDate().equals(nextDay));
     }
 
     @Test(expected = IllegalArgumentException.class)
