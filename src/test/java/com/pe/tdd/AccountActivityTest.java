@@ -4,6 +4,7 @@ import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
 import com.pe.tdd.exception.InvalidAccountException;
 import com.pe.tdd.repository.AccountActivityRepository;
+import com.pe.tdd.repository.AccountRepository;
 import com.pe.tdd.service.AccountActivityService;
 import com.pe.tdd.service.AccountService;
 import org.junit.Test;
@@ -45,13 +46,14 @@ public class AccountActivityTest {
     @Test(expected = InvalidAccountException.class)
     public void throwInvalidAccountExceptionOnInvalidAccountNumber() {
         AccountActivityRepository mockAccountActivityRepository = mock(AccountActivityRepository.class);
-        AccountService mockAccountService = mock(AccountService.class);
+        AccountRepository mockAccountRepository = mock(AccountRepository.class);
 
-        AccountActivityService accountActivityService = new AccountActivityService(mockAccountActivityRepository, mockAccountService);
+        AccountService accountService = new AccountService(mockAccountRepository);
+        AccountActivityService accountActivityService = new AccountActivityService(mockAccountActivityRepository, accountService);
 
-        when(mockAccountService.findAccount(anyLong(), anyString())).thenReturn(null);
+        when(mockAccountRepository.findAccountByAccountNumberAndUserName(anyLong(), anyString())).thenReturn(null);
 
-        List<AccountActivity> accountActivities = accountActivityService.findActivitiesByAccount(987456L, "user");
+        accountActivityService.findActivitiesByAccount(987456L, "user");
     }
 
 }
