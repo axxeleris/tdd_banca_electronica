@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AccountRepository {
+
     public List<Account> findAccountsByUserName(String usuario) {
         return Collections.emptyList();
     }

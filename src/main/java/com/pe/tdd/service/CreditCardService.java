@@ -1,8 +1,8 @@
 package com.pe.tdd.service;
 
 import com.pe.tdd.domain.CreditCard;
-import com.pe.tdd.exception.NIPUpdateException;
-import com.pe.tdd.exception.NIPUpdateMissingCharactersException;
+import com.pe.tdd.exception.NipUpdateException;
+import com.pe.tdd.exception.NipUpdateMissingCharactersException;
 import com.pe.tdd.repository.CreditCardRepository;
 
 public class CreditCardService {
@@ -15,12 +15,12 @@ public class CreditCardService {
 	
 	public CreditCard updateNip(String nip, String nipConfirm) {
 		if(nip.length() < 4) {
-			throw new NIPUpdateMissingCharactersException();
+			throw new NipUpdateMissingCharactersException();
 		}
 		if(nip == nipConfirm) {
 			return creditCardRepository.updateNip(nip);
 		}else {
-			throw new NIPUpdateException();
+			throw new NipUpdateException();
 		}
 	}
 }
