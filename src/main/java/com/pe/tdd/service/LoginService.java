@@ -1,8 +1,8 @@
 package com.pe.tdd.service;
 
+import com.pe.tdd.domain.User;
 import com.pe.tdd.exception.BlockedUserException;
 import com.pe.tdd.exception.InvalidUserAndPasswordException;
-import com.pe.tdd.domain.User;
 import com.pe.tdd.repository.UserRepository;
 
 public class LoginService {
@@ -22,7 +22,6 @@ public class LoginService {
             throw new InvalidUserAndPasswordException();
         }
     }
-
 
     private void checkBlockedUser(User user) {
         if (user.getBlocked()) {

@@ -1,8 +1,8 @@
 package com.pe.tdd;
 
+import com.pe.tdd.domain.User;
 import com.pe.tdd.exception.BlockedUserException;
 import com.pe.tdd.exception.InvalidUserAndPasswordException;
-import com.pe.tdd.domain.User;
 import com.pe.tdd.repository.UserRepository;
 import com.pe.tdd.service.LoginService;
 import org.junit.Test;
@@ -13,7 +13,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LoginServiceTest {
-
 
     @Test
     public void shouldLoginWithUserAndPassword() {
