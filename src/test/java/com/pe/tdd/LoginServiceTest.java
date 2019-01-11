@@ -16,7 +16,6 @@ public class LoginServiceTest {
 
     @Test
     public void shouldLoginWithUserAndPassword() {
-
         User expectedUser = new User("user", "password", false);
 
         UserRepository mockUserRepository = mock(UserRepository.class);
