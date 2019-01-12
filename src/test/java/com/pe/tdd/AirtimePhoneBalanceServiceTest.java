@@ -29,7 +29,6 @@ public class AirtimePhoneBalanceServiceTest {
 	    when(mockAccountRepository.update(Mockito.anyObject())).thenReturn(expectedAccount);
 	    account = phoneAirtimeBalanceService.buy(account, PhoneOperator.TELCEL, BigDecimal.valueOf(100));
 	    
-	    
 	    assertTrue(expectedAccount.getBalance().intValue() == 900);
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AccountRepository {
+
     public List<Account> findAccountsByUserName(String usuario) {
         return Collections.emptyList();
     }
@@ -16,5 +17,5 @@ public class AccountRepository {
     
     public Account update(Account account) {
     	return null;
-    }
+	}
 }

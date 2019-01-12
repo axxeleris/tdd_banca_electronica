@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AccountActivityRepository {
 
+    @SuppressWarnings("squid:S1172")
     public List<AccountActivity> findActivitiesByAccount(Long accountNumber) {
         return Collections.emptyList();
     }
