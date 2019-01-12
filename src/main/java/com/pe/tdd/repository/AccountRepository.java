@@ -13,4 +13,8 @@ public class AccountRepository {
     public Account findAccountByAccountNumberAndUserName(Long accountNumber, String userName) {
         return null;
     }
+    
+    public Account update(Account account) {
+    	return null;
+    }
 }
