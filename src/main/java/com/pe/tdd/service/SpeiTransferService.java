@@ -1,16 +1,16 @@
 package com.pe.tdd.service;
 
 import com.pe.tdd.domain.Account;
-import com.pe.tdd.domain.TefTransfer;
+import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.exception.InsufficientBalanceException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class TefTransferService {
+public class SpeiTransferService {
 
-    public TefTransfer transfer(Account originAccount, String accountNumber, BigDecimal amount) {
+    public SpeiTransfer transfer(Account originAccount, String accountNumber, BigDecimal amount) {
         if (originAccount == null) {
             throw new IllegalArgumentException("originAccount");
         }
@@ -28,9 +28,9 @@ public class TefTransferService {
             throw new InsufficientBalanceException();
         }
 
-        return new TefTransfer(
+        return new SpeiTransfer(
                 "12345678",
-                LocalDate.now().plusDays(1)
+                LocalDate.now()
         );
     }
 

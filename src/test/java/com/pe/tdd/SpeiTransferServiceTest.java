@@ -2,8 +2,10 @@ package com.pe.tdd;
 
 
 import com.pe.tdd.domain.Account;
+import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.domain.TefTransfer;
 import com.pe.tdd.exception.InsufficientBalanceException;
+import com.pe.tdd.service.SpeiTransferService;
 import com.pe.tdd.service.TefTransferService;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
@@ -14,34 +16,34 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertTrue;
 
-public class TefTransferServiceTest {
+public class SpeiTransferServiceTest {
 
-    private TefTransferService tefTransferService;
+    private SpeiTransferService speiTransferService;
 
     @Before
     public void setUp() throws Exception {
-        tefTransferService = new TefTransferService();
+        speiTransferService = new SpeiTransferService();
     }
 
     @Test
     public void shouldDoTransfer() {
         Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(1000));
 
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer speiTransfer = speiTransferService.transfer(
                 originAccount,
                 "987654",
                 BigDecimal.valueOf(500)
         );
 
-        LocalDate nextDay = LocalDate.now().plusDays(1);
+        LocalDate currentDay = LocalDate.now();
 
-        assertTrue(StringUtils.isEmpty(tefTransfer.getAuthorizationCode()) == false);
-        assertTrue(tefTransfer.getOperationDate().equals(nextDay));
+        assertTrue(StringUtils.isEmpty(speiTransfer.getAuthorizationCode()) == false);
+        assertTrue(speiTransfer.getOperationDate().equals(currentDay));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnNullOriginAccount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer transfer = speiTransferService.transfer(
                 null,
                 "7894564",
                 BigDecimal.valueOf(500)
@@ -50,7 +52,7 @@ public class TefTransferServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnNullAccountNumber() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer transfer = speiTransferService.transfer(
                 new Account("1234", "Debit", BigDecimal.valueOf(1000)),
                 null,
                 BigDecimal.valueOf(500)
@@ -59,7 +61,7 @@ public class TefTransferServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnEmptyAccountNumber() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer transfer = speiTransferService.transfer(
                 new Account("1234", "Debit", BigDecimal.valueOf(1000)),
                 "",
                 BigDecimal.valueOf(500)
@@ -68,7 +70,7 @@ public class TefTransferServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnNegativeAmount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer transfer = speiTransferService.transfer(
                 new Account("1234", "Debit", BigDecimal.valueOf(1000)),
                 "879465",
                 BigDecimal.valueOf(-500)
@@ -77,7 +79,7 @@ public class TefTransferServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnHigherMaxAmount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer transfer = speiTransferService.transfer(
                 new Account("1234", "Debit", BigDecimal.valueOf(1000)),
                 "879465",
                 BigDecimal.valueOf(5001)
@@ -86,7 +88,7 @@ public class TefTransferServiceTest {
 
     @Test(expected = InsufficientBalanceException.class)
     public void throwInsufficientBalanceExceptionOnAmountHigherThanAccountBalance() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
+        SpeiTransfer tefTransfer = speiTransferService.transfer(
                 new Account("1234", "Debit", BigDecimal.valueOf(1000)),
                 "879465",
                 BigDecimal.valueOf(1001)
