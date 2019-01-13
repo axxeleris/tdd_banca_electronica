@@ -32,7 +32,7 @@ public class ServiceProviderService {
         }
 
         if (serviceProvider == null) {
-            new IllegalArgumentException("El proveedor de servicio es requerido");
+            throw new IllegalArgumentException("El proveedor de servicio es requerido");
         }
 
         if (date == null) {
