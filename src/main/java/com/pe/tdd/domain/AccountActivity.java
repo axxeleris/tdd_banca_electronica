@@ -6,11 +6,16 @@ public class AccountActivity {
     private Long id;
     private String description;
     private BigDecimal amount;
+    private String authorizationCode;
 
-    public AccountActivity(Long id, String description, BigDecimal amount) {
+    public AccountActivity() {
+    }
+
+    public AccountActivity(Long id, String description, BigDecimal amount, String authorizationCode) {
         this.id = id;
         this.description = description;
         this.amount = amount;
+        this.authorizationCode = authorizationCode;
     }
 
     public Long getId() {
@@ -35,5 +40,13 @@ public class AccountActivity {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getAuthorizationCode() {
+        return authorizationCode;
+    }
+
+    public void setAuthorizationCode(String authorizationCode) {
+        this.authorizationCode = authorizationCode;
     }
 }

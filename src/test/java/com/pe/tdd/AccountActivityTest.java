@@ -29,9 +29,9 @@ public class AccountActivityTest {
         AccountActivityService accountActivityService = new AccountActivityService(mockAccountActivityRepository, mockAccountService);
 
         List<AccountActivity> expectedAccountActivityList = Arrays.asList(
-                new AccountActivity(513354L, "Venta 01", BigDecimal.valueOf(1000)),
-                new AccountActivity(48711L, "Venta 02", BigDecimal.valueOf(550)),
-                new AccountActivity(864546L, "Deposito", BigDecimal.valueOf(8000))
+                new AccountActivity(123L, "Venta 01", BigDecimal.valueOf(1000), "123"),
+                new AccountActivity(456L, "Venta 02", BigDecimal.valueOf(550), "456"),
+                new AccountActivity(789L, "Deposito", BigDecimal.valueOf(8000), "789")
         );
         Account expectedAccount = new Account("1234", "Debit 01", BigDecimal.valueOf(5000));
 

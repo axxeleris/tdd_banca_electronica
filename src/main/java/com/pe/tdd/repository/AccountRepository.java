@@ -14,8 +14,12 @@ public class AccountRepository {
     public Account findAccountByAccountNumberAndUserName(Long accountNumber, String userName) {
         return null;
     }
-    
-    public Account update(Account account) {
-    	return null;
-	}
+
+    public Account findByAccountNumber(String accountNumber) {
+        return null;
+    }
+
+    public Account save(Account account) {
+        return null;
+    }
 }

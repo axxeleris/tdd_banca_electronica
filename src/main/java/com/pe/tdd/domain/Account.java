@@ -3,7 +3,6 @@ package com.pe.tdd.domain;
 import java.math.BigDecimal;
 
 public class Account {
-
     private String accountNumber;
     private String description;
     private BigDecimal balance;

@@ -19,7 +19,7 @@ public class PhoneAirtimeBalanceService {
 			throw new InsufficientBalanceException();
 		}
 		account.setBalance(totalAmount);
-		accountRepository.update(account);
+		accountRepository.save(account);
 		return account;
 	}
 }

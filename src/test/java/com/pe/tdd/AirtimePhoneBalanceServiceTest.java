@@ -26,7 +26,7 @@ public class AirtimePhoneBalanceServiceTest {
 	    PhoneAirtimeBalanceService phoneAirtimeBalanceService = new PhoneAirtimeBalanceService(mockAccountRepository);
 	    
 	    
-	    when(mockAccountRepository.update(Mockito.anyObject())).thenReturn(expectedAccount);
+	    when(mockAccountRepository.save(Mockito.anyObject())).thenReturn(expectedAccount);
 	    account = phoneAirtimeBalanceService.buy(account, PhoneOperator.TELCEL, BigDecimal.valueOf(100));
 	    
 	    assertTrue(expectedAccount.getBalance().intValue() == 900);
@@ -41,7 +41,7 @@ public class AirtimePhoneBalanceServiceTest {
 	    PhoneAirtimeBalanceService phoneAirtimeBalanceService = new PhoneAirtimeBalanceService(mockAccountRepository);
 	    
 	    
-	    when(mockAccountRepository.update(Mockito.anyObject())).thenReturn(expectedAccount);
+	    when(mockAccountRepository.save(Mockito.anyObject())).thenReturn(expectedAccount);
 	    account = phoneAirtimeBalanceService.buy(account, PhoneOperator.TELCEL, BigDecimal.valueOf(100));
 	}
 }
