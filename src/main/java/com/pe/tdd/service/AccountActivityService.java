@@ -3,6 +3,7 @@ package com.pe.tdd.service;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
 import com.pe.tdd.domain.ServiceProviderPaymentResponse;
+import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.exception.InvalidAccountException;
 import com.pe.tdd.repository.AccountActivityRepository;
 
@@ -32,6 +33,21 @@ public class AccountActivityService {
         accountActivity.setAmount(serviceProviderPaymentResponse.getAmount());
         accountActivity.setDescription(serviceProviderPaymentResponse.getDescription());
         accountActivity.setAuthorizationCode(serviceProviderPaymentResponse.getAuthorizationCode());
+        accountActivity.setId(1L);
+
+        accountService.updateBalance(
+                accountActivity.getAmount().negate(),
+                account
+        );
+
+        return accountActivityRepository.save(accountActivity);
+    }
+
+    public AccountActivity addAccountActivity(SpeiTransfer speiTransfer, Account account) {
+        AccountActivity accountActivity = new AccountActivity();
+        accountActivity.setAmount(speiTransfer.getAmount());
+        accountActivity.setDescription("Transferencia SPEI");
+        accountActivity.setAuthorizationCode(speiTransfer.getAuthorizationCode());
         accountActivity.setId(1L);
 
         accountService.updateBalance(

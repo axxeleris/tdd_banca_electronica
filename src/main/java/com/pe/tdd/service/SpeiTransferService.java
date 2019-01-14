@@ -10,6 +10,15 @@ import java.time.LocalDate;
 
 public class SpeiTransferService {
 
+    AccountActivityService accountActivityService;
+
+    AccountService accountService;
+
+    public SpeiTransferService(AccountActivityService accountActivityService, AccountService accountService) {
+        this.accountActivityService = accountActivityService;
+        this.accountService = accountService;
+    }
+
     public SpeiTransfer transfer(Account originAccount, String accountNumber, BigDecimal amount) {
         if (originAccount == null) {
             throw new IllegalArgumentException("originAccount");
@@ -28,10 +37,15 @@ public class SpeiTransferService {
             throw new InsufficientBalanceException();
         }
 
-        return new SpeiTransfer(
+        SpeiTransfer result = new SpeiTransfer(
                 "12345678",
-                LocalDate.now()
+                LocalDate.now(),
+                amount
         );
+
+        accountActivityService.addAccountActivity(result, originAccount);
+
+        return result;
     }
 
 

@@ -36,11 +36,15 @@ public class ServiceProviderService {
         }
 
         if (date == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("La fecha es requerida");
         }
 
         if (amount == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("El monto es requerido");
+        }
+
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("El monto debe ser mayor a cero");
         }
 
         if (date.compareTo(LocalDate.now()) < 0) {

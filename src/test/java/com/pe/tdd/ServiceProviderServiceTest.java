@@ -102,6 +102,24 @@ public class ServiceProviderServiceTest {
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIllegalArgumentExceptionWhenReferenceIsNull() {
+        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(1000));
+
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviders().stream()
+                .findFirst()
+                .get();
+
+        ServiceProviderPaymentResponse paymentServiceResponse = serviceProviderService.pay(
+                originAccount,
+                serviceProvider,
+                null,
+                LocalDate.now().minusDays(5),
+                BigDecimal.valueOf(150)
+        );
+
+    }
+
     @Test(expected = InsufficientBalanceException.class)
     public void throwIllegalArgumentExceptionWhenAmountIsLessThanAccountBalance() {
         Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
@@ -119,5 +137,75 @@ public class ServiceProviderServiceTest {
         );
 
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIllegalArgumentExceptionWhenServiceProviderIsNull() {
+        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
+
+
+        ServiceProviderPaymentResponse paymentServiceResponse = serviceProviderService.pay(
+                originAccount,
+                null,
+                "123456",
+                LocalDate.now(),
+                BigDecimal.valueOf(1)
+        );
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIllegalArgumentExceptionWhenDateIsNull() {
+        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
+
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviders().stream()
+                .findFirst()
+                .get();
+
+        ServiceProviderPaymentResponse paymentServiceResponse = serviceProviderService.pay(
+                originAccount,
+                serviceProvider,
+                "123456",
+                null,
+                BigDecimal.valueOf(1)
+        );
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIllegalArgumentExceptionWhenAmountIsNull() {
+        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
+
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviders().stream()
+                .findFirst()
+                .get();
+
+        ServiceProviderPaymentResponse paymentServiceResponse = serviceProviderService.pay(
+                originAccount,
+                serviceProvider,
+                "123456",
+                LocalDate.now(),
+                null
+        );
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIllegalArgumentExceptionWhenAmountIsLessThanZero() {
+        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
+
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviders().stream()
+                .findFirst()
+                .get();
+
+        ServiceProviderPaymentResponse paymentServiceResponse = serviceProviderService.pay(
+                originAccount,
+                serviceProvider,
+                "123456",
+                LocalDate.now(),
+                BigDecimal.valueOf(-5)
+        );
+
+    }
+
 
 }

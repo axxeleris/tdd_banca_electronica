@@ -3,10 +3,12 @@ package com.pe.tdd;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.SpeiTransfer;
-import com.pe.tdd.domain.TefTransfer;
 import com.pe.tdd.exception.InsufficientBalanceException;
+import com.pe.tdd.repository.AccountActivityRepository;
+import com.pe.tdd.repository.AccountRepository;
+import com.pe.tdd.service.AccountActivityService;
+import com.pe.tdd.service.AccountService;
 import com.pe.tdd.service.SpeiTransferService;
-import com.pe.tdd.service.TefTransferService;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,30 +17,50 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class SpeiTransferServiceTest {
 
     private SpeiTransferService speiTransferService;
 
+    private AccountActivityRepository accountActivityRepository;
+    private AccountActivityService accountActivityService;
+
+    private AccountRepository accountRepository;
+    private AccountService accountService;
+
     @Before
     public void setUp() throws Exception {
-        speiTransferService = new SpeiTransferService();
+
+        accountRepository = mock(AccountRepository.class);
+        accountService = new AccountService(accountRepository);
+
+        accountActivityRepository = mock(AccountActivityRepository.class);
+        accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
+
+        speiTransferService = new SpeiTransferService(accountActivityService, accountService);
+
     }
 
     @Test
     public void shouldDoTransfer() {
-        Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(1000));
+        BigDecimal initialBalance = BigDecimal.valueOf(1000);
+        BigDecimal serviceAmount = BigDecimal.valueOf(150);
+        BigDecimal expectedBalance = initialBalance.subtract(serviceAmount);
+
+        Account originAccount = new Account("1234", "Debit", initialBalance);
 
         SpeiTransfer speiTransfer = speiTransferService.transfer(
                 originAccount,
                 "987654",
-                BigDecimal.valueOf(500)
+                serviceAmount
         );
 
         LocalDate currentDay = LocalDate.now();
 
         assertTrue(StringUtils.isEmpty(speiTransfer.getAuthorizationCode()) == false);
         assertTrue(speiTransfer.getOperationDate().equals(currentDay));
+        assertTrue(expectedBalance.compareTo(originAccount.getBalance()) == 0);
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -1,15 +1,19 @@
 package com.pe.tdd.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class SpeiTransfer {
 
-    public String authorizationCode;
-    public LocalDate operationDate;
+    private String authorizationCode;
+    private LocalDate operationDate;
+    private BigDecimal amount;
 
-    public SpeiTransfer(String authorizationCode, LocalDate operationDate) {
+    public SpeiTransfer(String authorizationCode, LocalDate operationDate, BigDecimal amount) {
         this.authorizationCode = authorizationCode;
         this.operationDate = operationDate;
+        this.amount = amount;
+
     }
 
     public String getAuthorizationCode() {
@@ -26,5 +30,13 @@ public class SpeiTransfer {
 
     public void setOperationDate(LocalDate operationDate) {
         this.operationDate = operationDate;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }
