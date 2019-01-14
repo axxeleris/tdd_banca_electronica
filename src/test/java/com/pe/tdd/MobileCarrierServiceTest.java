@@ -14,7 +14,6 @@ import com.pe.tdd.service.AccountService;
 import com.pe.tdd.service.MobileCarrierService;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -65,8 +64,13 @@ public class MobileCarrierServiceTest {
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIlegalArgumentExceptionOnGetRechargesFromCarrierWhenMobileCarrierIdIsNull() {
+        mobileCarrierService.getRechargesFromCarrier(null);
+    }
+
     @Test
-    public void shouldBeAbleToBuyAirtimeBalance() {
+    public void shouldBuyMobileCarrierRecharge() {
         BigDecimal initialBalance = BigDecimal.valueOf(1000);
         BigDecimal carrierRechargeAmount = BigDecimal.valueOf(200);
         BigDecimal expectedBalance = initialBalance.subtract(carrierRechargeAmount);
@@ -92,8 +96,57 @@ public class MobileCarrierServiceTest {
         assertTrue(originAccount.getBalance().compareTo(expectedBalance) == 0);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIlegalArgumentExceptionOnBuyWithOriginAccountIsNull() {
+        BigDecimal carrierRechargeAmount = BigDecimal.valueOf(200);
+
+        Account originAccount = null;
+
+        MobileCarrier mobileCarrier = mobileCarrierService.findMobileCarriers().stream()
+                .findFirst()
+                .get();
+
+        when(mobileCarrierRechargeRepository.findAllByMobileCarrierId(anyLong())).thenReturn(
+                Arrays.asList(
+                        new MobileCarrierRecharge(1L, "Movistar $200", carrierRechargeAmount)
+                )
+        );
+        MobileCarrierRecharge mobileCarrierRecharge = mobileCarrierService.getRechargesFromCarrier(mobileCarrier.getId()).stream()
+                .findFirst()
+                .get();
+
+        mobileCarrierService.buy(originAccount, mobileCarrier, mobileCarrierRecharge);
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIlegalArgumentExceptionOnBuyWithMobileCarrierIsNull() {
+        BigDecimal initialBalance = BigDecimal.valueOf(1000);
+        BigDecimal carrierRechargeAmount = BigDecimal.valueOf(200);
+
+        Account originAccount = new Account("123", "Debit01", initialBalance);
+
+        MobileCarrier mobileCarrier = new MobileCarrier(1L, "Test");
+
+        MobileCarrierRecharge mobileCarrierRecharge = null;
+
+        mobileCarrierService.buy(originAccount, mobileCarrier, mobileCarrierRecharge);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwIlegalArgumentExceptionOnBuyWithMobileCarrieRechargeIsNull() {
+        BigDecimal initialBalance = BigDecimal.valueOf(1000);
+        BigDecimal carrierRechargeAmount = BigDecimal.valueOf(200);
+
+        Account originAccount = new Account("123", "Debit01", initialBalance);
+
+        MobileCarrierRecharge mobileCarrierRecharge = new MobileCarrierRecharge(1L, "Test", BigDecimal.ZERO);
+
+        mobileCarrierService.buy(originAccount, null, mobileCarrierRecharge);
+    }
+
     @Test(expected = InsufficientBalanceException.class)
-    public void throwInsufficientBalanceExceptionWhenBuyingWithoutEnoughBalance() {
+    public void throwInsufficientBalanceExceptionOnBuyWhenBuyingWithoutEnoughBalance() {
         BigDecimal initialBalance = BigDecimal.valueOf(100);
         BigDecimal carrierRechargeAmount = BigDecimal.valueOf(200);
         BigDecimal expectedBalance = initialBalance.subtract(carrierRechargeAmount);

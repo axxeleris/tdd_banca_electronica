@@ -56,6 +56,9 @@ public class MobileCarrierService {
     }
 
     public List<MobileCarrierRecharge> getRechargesFromCarrier(Long mobileCarrierId) {
+        if (mobileCarrierId == null) {
+            throw new IllegalArgumentException("El identificador del carrier o compañia es requerido");
+        }
         return mobileCarrierRechargeRepository.findAllByMobileCarrierId(mobileCarrierId);
     }
 }
