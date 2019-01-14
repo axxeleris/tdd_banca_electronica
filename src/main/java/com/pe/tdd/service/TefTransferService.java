@@ -10,6 +10,15 @@ import java.time.LocalDate;
 
 public class TefTransferService {
 
+    AccountActivityService accountActivityService;
+
+    AccountService accountService;
+
+    public TefTransferService(AccountActivityService accountActivityService, AccountService accountService) {
+        this.accountActivityService = accountActivityService;
+        this.accountService = accountService;
+    }
+
     public TefTransfer transfer(Account originAccount, String accountNumber, BigDecimal amount) {
         if (originAccount == null) {
             throw new IllegalArgumentException("originAccount");
@@ -28,10 +37,15 @@ public class TefTransferService {
             throw new InsufficientBalanceException();
         }
 
-        return new TefTransfer(
+        TefTransfer result = new TefTransfer(
                 "12345678",
-                LocalDate.now().plusDays(1)
+                LocalDate.now().plusDays(1),
+                amount
         );
+
+        accountActivityService.addAccountActivity(result, originAccount);
+
+        return result;
     }
 
 

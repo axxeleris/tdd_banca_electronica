@@ -2,8 +2,10 @@ package com.pe.tdd.service;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
+import com.pe.tdd.domain.MobileCarrierRechargeBuyResponse;
 import com.pe.tdd.domain.ServiceProviderPaymentResponse;
 import com.pe.tdd.domain.SpeiTransfer;
+import com.pe.tdd.domain.TefTransfer;
 import com.pe.tdd.exception.InvalidAccountException;
 import com.pe.tdd.repository.AccountActivityRepository;
 
@@ -48,6 +50,37 @@ public class AccountActivityService {
         accountActivity.setAmount(speiTransfer.getAmount());
         accountActivity.setDescription("Transferencia SPEI");
         accountActivity.setAuthorizationCode(speiTransfer.getAuthorizationCode());
+        accountActivity.setId(1L);
+
+        accountService.updateBalance(
+                accountActivity.getAmount().negate(),
+                account
+        );
+
+        return accountActivityRepository.save(accountActivity);
+    }
+
+    public AccountActivity addAccountActivity(MobileCarrierRechargeBuyResponse mobileCarrierRechargeBuyResponse, Account account) {
+        AccountActivity accountActivity = new AccountActivity();
+        accountActivity.setAmount(mobileCarrierRechargeBuyResponse.getAmount());
+        accountActivity.setDescription(mobileCarrierRechargeBuyResponse.getDescription());
+        accountActivity.setAuthorizationCode(mobileCarrierRechargeBuyResponse.getAuthorizationCode());
+        accountActivity.setId(1L);
+
+        accountService.updateBalance(
+                accountActivity.getAmount().negate(),
+                account
+        );
+
+        return accountActivityRepository.save(accountActivity);
+    }
+
+
+    public AccountActivity addAccountActivity(TefTransfer tefTransfer, Account account) {
+        AccountActivity accountActivity = new AccountActivity();
+        accountActivity.setAmount(tefTransfer.getAmount());
+        accountActivity.setDescription("Transferencia SPEI");
+        accountActivity.setAuthorizationCode(tefTransfer.getAuthorizationCode());
         accountActivity.setId(1L);
 
         accountService.updateBalance(

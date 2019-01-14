@@ -30,7 +30,7 @@ public class SpeiTransferServiceTest {
     private AccountService accountService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         accountRepository = mock(AccountRepository.class);
         accountService = new AccountService(accountRepository);
@@ -39,7 +39,6 @@ public class SpeiTransferServiceTest {
         accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
 
         speiTransferService = new SpeiTransferService(accountActivityService, accountService);
-
     }
 
     @Test

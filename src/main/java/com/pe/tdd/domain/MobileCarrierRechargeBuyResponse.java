@@ -3,14 +3,15 @@ package com.pe.tdd.domain;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class TefTransfer {
+public class MobileCarrierRechargeBuyResponse {
+    String authorizationCode;
+    String description;
+    LocalDate operationDate;
+    BigDecimal amount;
 
-    private String authorizationCode;
-    private LocalDate operationDate;
-    private BigDecimal amount;
-
-    public TefTransfer(String authorizationCode, LocalDate operationDate, BigDecimal amount) {
+    public MobileCarrierRechargeBuyResponse(String authorizationCode, String description, LocalDate operationDate, BigDecimal amount) {
         this.authorizationCode = authorizationCode;
+        this.description = description;
         this.operationDate = operationDate;
         this.amount = amount;
     }
@@ -21,6 +22,14 @@ public class TefTransfer {
 
     public void setAuthorizationCode(String authorizationCode) {
         this.authorizationCode = authorizationCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDate getOperationDate() {
