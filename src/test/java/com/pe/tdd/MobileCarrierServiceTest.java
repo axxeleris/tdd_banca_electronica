@@ -26,9 +26,9 @@ import static org.mockito.Mockito.when;
 
 public class MobileCarrierServiceTest {
 
-    MobileCarrierService mobileCarrierService;
-    MobileCarrierRepository mobileCarrierRepository;
-    MobileCarrierRechargeRepository mobileCarrierRechargeRepository;
+    private MobileCarrierService mobileCarrierService;
+    private MobileCarrierRepository mobileCarrierRepository;
+    private MobileCarrierRechargeRepository mobileCarrierRechargeRepository;
 
     private AccountActivityRepository accountActivityRepository;
     private AccountActivityService accountActivityService;
@@ -37,7 +37,7 @@ public class MobileCarrierServiceTest {
     private AccountService accountService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         accountRepository = mock(AccountRepository.class);
         accountService = new AccountService(accountRepository);
