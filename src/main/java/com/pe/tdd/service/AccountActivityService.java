@@ -2,6 +2,7 @@ package com.pe.tdd.service;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
+import com.pe.tdd.domain.CreditCardPaymentResponse;
 import com.pe.tdd.domain.MobileCarrierRechargeBuyResponse;
 import com.pe.tdd.domain.ServiceProviderPaymentResponse;
 import com.pe.tdd.domain.SpeiTransfer;
@@ -50,6 +51,21 @@ public class AccountActivityService {
         accountActivity.setAmount(speiTransfer.getAmount());
         accountActivity.setDescription("Transferencia SPEI");
         accountActivity.setAuthorizationCode(speiTransfer.getAuthorizationCode());
+        accountActivity.setId(1L);
+
+        accountService.updateBalance(
+                accountActivity.getAmount().negate(),
+                account
+        );
+
+        return accountActivityRepository.save(accountActivity);
+    }
+
+    public AccountActivity addAccountActivity(CreditCardPaymentResponse creditCardPaymentResponse, Account account) {
+        AccountActivity accountActivity = new AccountActivity();
+        accountActivity.setAmount(creditCardPaymentResponse.getAmount());
+        accountActivity.setDescription("Pago de tarjeta de credito");
+        accountActivity.setAuthorizationCode(creditCardPaymentResponse.getAuthorizationCode());
         accountActivity.setId(1L);
 
         accountService.updateBalance(

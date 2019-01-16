@@ -18,7 +18,7 @@ public class NipServiceTest {
     AccountService accountService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         accountRepository = mock(AccountRepository.class);
         accountService = new AccountService(accountRepository);
     }
