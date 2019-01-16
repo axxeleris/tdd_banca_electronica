@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 
 public class CreditCardServiceTest {
 
-    CreditCardService creditCardService;
+    private CreditCardService creditCardService;
 
     private AccountActivityRepository accountActivityRepository;
     private AccountActivityService accountActivityService;
