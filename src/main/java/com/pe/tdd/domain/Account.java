@@ -6,6 +6,7 @@ public class Account {
     private String accountNumber;
     private String description;
     private BigDecimal balance;
+    private String nip;
 
     public Account(String accountNumber, String description, BigDecimal balance) {
         this.accountNumber = accountNumber;
@@ -35,5 +36,13 @@ public class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
     }
 }
