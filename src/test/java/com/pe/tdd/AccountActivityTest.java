@@ -3,10 +3,13 @@ package com.pe.tdd;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
 import com.pe.tdd.exception.InvalidAccountException;
-import com.pe.tdd.repository.impl.AccountActivityRepository;
-import com.pe.tdd.repository.impl.AccountRepository;
+import com.pe.tdd.repository.AccountActivityRepository;
+import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
 import com.pe.tdd.service.AccountActivityService;
 import com.pe.tdd.service.AccountService;
+import com.pe.tdd.service.impl.AccountActivityServiceImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -23,10 +26,10 @@ public class AccountActivityTest {
 
     @Test
     public void shouldReturnAccountActivities() {
-        AccountActivityRepository mockAccountActivityRepository = mock(AccountActivityRepository.class);
-        AccountService mockAccountService = mock(AccountService.class);
+        AccountActivityRepository mockAccountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        AccountService mockAccountService = mock(AccountServiceImpl.class);
 
-        AccountActivityService accountActivityService = new AccountActivityService(mockAccountActivityRepository, mockAccountService);
+        AccountActivityService accountActivityService = new AccountActivityServiceImpl(mockAccountActivityRepository, mockAccountService);
 
         List<AccountActivity> expectedAccountActivityList = Arrays.asList(
                 new AccountActivity(123L, "Venta 01", BigDecimal.valueOf(1000), "123"),
@@ -45,11 +48,11 @@ public class AccountActivityTest {
 
     @Test(expected = InvalidAccountException.class)
     public void throwInvalidAccountExceptionOnInvalidAccountNumber() {
-        AccountActivityRepository mockAccountActivityRepository = mock(AccountActivityRepository.class);
-        AccountRepository mockAccountRepository = mock(AccountRepository.class);
+        AccountActivityRepositoryImpl mockAccountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        AccountRepositoryImpl mockAccountRepository = mock(AccountRepositoryImpl.class);
 
-        AccountService accountService = new AccountService(mockAccountRepository);
-        AccountActivityService accountActivityService = new AccountActivityService(mockAccountActivityRepository, accountService);
+        AccountServiceImpl accountService = new AccountServiceImpl(mockAccountRepository);
+        AccountActivityServiceImpl accountActivityService = new AccountActivityServiceImpl(mockAccountActivityRepository, accountService);
 
         when(mockAccountRepository.findAccountByAccountNumberAndUserName(anyLong(), anyString())).thenReturn(null);
 

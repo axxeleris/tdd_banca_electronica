@@ -1,8 +1,8 @@
 package com.pe.tdd;
 
 import com.pe.tdd.domain.Account;
-import com.pe.tdd.repository.impl.AccountRepository;
-import com.pe.tdd.service.AccountService;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +17,13 @@ import static org.mockito.Mockito.when;
 
 public class AccountServiceTest {
 
-    AccountRepository accountRepository;
-    AccountService accountService;
+    AccountRepositoryImpl accountRepository;
+    AccountServiceImpl accountService;
 
     @Before
     public void setUp() throws Exception {
-        accountRepository = mock(AccountRepository.class);
-        accountService = new AccountService(accountRepository);
+        accountRepository = mock(AccountRepositoryImpl.class);
+        accountService = new AccountServiceImpl(accountRepository);
     }
 
     @Test

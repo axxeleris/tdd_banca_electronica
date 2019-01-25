@@ -3,8 +3,8 @@ package com.pe.tdd;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.TakeOutMoneyWithoutCard;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.impl.TakeOutMoneyWithoutCardRepository;
-import com.pe.tdd.service.TakeOutMoneyWithoutCardService;
+import com.pe.tdd.repository.impl.TakeOutMoneyWithoutCardRepositoryImpl;
+import com.pe.tdd.service.impl.TakeOutMoneyWithoutCardServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,14 +18,14 @@ import static org.mockito.Mockito.when;
 
 public class TakeOutMoneyWithoutCardTest {
 
-    TakeOutMoneyWithoutCardRepository takeOutMoneyWithoutCardRepository;
+    TakeOutMoneyWithoutCardRepositoryImpl takeOutMoneyWithoutCardRepository;
 
-    TakeOutMoneyWithoutCardService takeOutMoneyWithoutCardService;
+    TakeOutMoneyWithoutCardServiceImpl takeOutMoneyWithoutCardService;
 
     @Before
     public void setUp() throws Exception {
-        takeOutMoneyWithoutCardRepository = mock(TakeOutMoneyWithoutCardRepository.class);
-        takeOutMoneyWithoutCardService = new TakeOutMoneyWithoutCardService(takeOutMoneyWithoutCardRepository);
+        takeOutMoneyWithoutCardRepository = mock(TakeOutMoneyWithoutCardRepositoryImpl.class);
+        takeOutMoneyWithoutCardService = new TakeOutMoneyWithoutCardServiceImpl(takeOutMoneyWithoutCardRepository);
     }
 
     @Test

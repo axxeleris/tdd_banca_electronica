@@ -12,6 +12,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.jacoco.reportPaths>target/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <sonar.sources>${project.basedir}/src/main/</sonar.sources>
+        <sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
+        <sonar.tests>${project.basedir}/src/test/</sonar.tests>
+        <sonar.coverage.exclusions>
+            src/main/java/com/pe/tdd/domain/*,src/main/java/com/pe/tdd/repository/impl/*
+        </sonar.coverage.exclusions>
+
     </properties>
 
     <dependencies>
@@ -44,7 +55,7 @@
                     <excludes>
                         <exclude>com/**/dto/*</exclude>
                         <exclude>com/**/domain/*</exclude>
-                        <exclude>com/**/repository/*</exclude>
+                        <exclude>com/**/repository/impl/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

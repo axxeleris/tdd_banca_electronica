@@ -3,11 +3,11 @@ package com.pe.tdd;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.CreditCardPaymentResponse;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.impl.AccountActivityRepository;
-import com.pe.tdd.repository.impl.AccountRepository;
-import com.pe.tdd.service.AccountActivityService;
-import com.pe.tdd.service.AccountService;
-import com.pe.tdd.service.CreditCardService;
+import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
+import com.pe.tdd.service.impl.AccountActivityServiceImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
+import com.pe.tdd.service.impl.CreditCardServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,23 +19,23 @@ import static org.mockito.Mockito.mock;
 
 public class CreditCardServiceTest {
 
-    private CreditCardService creditCardService;
+    private CreditCardServiceImpl creditCardService;
 
-    private AccountActivityRepository accountActivityRepository;
-    private AccountActivityService accountActivityService;
+    private AccountActivityRepositoryImpl accountActivityRepository;
+    private AccountActivityServiceImpl accountActivityService;
 
-    private AccountRepository accountRepository;
-    private AccountService accountService;
+    private AccountRepositoryImpl accountRepository;
+    private AccountServiceImpl accountService;
 
     @Before
     public void setUp() throws Exception {
-        accountRepository = mock(AccountRepository.class);
-        accountService = new AccountService(accountRepository);
+        accountRepository = mock(AccountRepositoryImpl.class);
+        accountService = new AccountServiceImpl(accountRepository);
 
-        accountActivityRepository = mock(AccountActivityRepository.class);
-        accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
+        accountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        accountActivityService = new AccountActivityServiceImpl(accountActivityRepository, accountService);
 
-        creditCardService = new CreditCardService(accountActivityService, accountService);
+        creditCardService = new CreditCardServiceImpl(accountActivityService, accountService);
     }
 
     @Test

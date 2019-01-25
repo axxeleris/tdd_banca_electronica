@@ -4,12 +4,12 @@ import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.ServiceProvider;
 import com.pe.tdd.domain.ServiceProviderPaymentResponse;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.impl.AccountActivityRepository;
-import com.pe.tdd.repository.impl.AccountRepository;
-import com.pe.tdd.repository.impl.ServiceProviderRepository;
-import com.pe.tdd.service.AccountActivityService;
-import com.pe.tdd.service.AccountService;
-import com.pe.tdd.service.ServiceProviderService;
+import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
+import com.pe.tdd.repository.impl.ServiceProviderRepositoryImpl;
+import com.pe.tdd.service.impl.AccountActivityServiceImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
+import com.pe.tdd.service.impl.ServiceProviderServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,23 +25,23 @@ import static org.mockito.Mockito.when;
 
 public class ServiceProviderServiceTest {
 
-    private AccountRepository accountRepository;
-    private AccountService accountService;
-    private AccountActivityRepository accountActivityRepository;
-    private AccountActivityService accountActivityService;
-    private ServiceProviderService serviceProviderService;
-    private ServiceProviderRepository serviceProviderRepository;
+    private AccountRepositoryImpl accountRepository;
+    private AccountServiceImpl accountService;
+    private AccountActivityRepositoryImpl accountActivityRepository;
+    private AccountActivityServiceImpl accountActivityService;
+    private ServiceProviderServiceImpl serviceProviderService;
+    private ServiceProviderRepositoryImpl serviceProviderRepository;
 
     @Before
     public void setUp() throws Exception {
-        accountRepository = mock(AccountRepository.class);
-        accountService = new AccountService(accountRepository);
+        accountRepository = mock(AccountRepositoryImpl.class);
+        accountService = new AccountServiceImpl(accountRepository);
 
-        accountActivityRepository = mock(AccountActivityRepository.class);
-        accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
+        accountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        accountActivityService = new AccountActivityServiceImpl(accountActivityRepository, accountService);
 
-        serviceProviderRepository = mock(ServiceProviderRepository.class);
-        serviceProviderService = new ServiceProviderService(serviceProviderRepository, accountActivityService);
+        serviceProviderRepository = mock(ServiceProviderRepositoryImpl.class);
+        serviceProviderService = new ServiceProviderServiceImpl(serviceProviderRepository, accountActivityService);
 
         when(serviceProviderRepository.findAll()).thenReturn(
                 Arrays.asList(
@@ -139,7 +139,7 @@ public class ServiceProviderServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionWhenServiceProviderIsNull() {
+    public void throw_IllegalArgumentException_When_ServiceProviderIsNull() {
         Account originAccount = new Account("1234", "Debit", BigDecimal.valueOf(100));
 
 

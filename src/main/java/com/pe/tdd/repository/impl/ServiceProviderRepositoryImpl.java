@@ -1,15 +1,14 @@
 package com.pe.tdd.repository.impl;
 
-import com.pe.tdd.domain.MobileCarrier;
+import com.pe.tdd.domain.ServiceProvider;
 
 import java.util.Collections;
 import java.util.List;
 
-public class MobileCarrierRepository {
+public class ServiceProviderRepositoryImpl {
 
-    public List<MobileCarrier> findAll() {
+    public List<ServiceProvider> findAll() {
         return Collections.emptyList();
     }
-
 
 }

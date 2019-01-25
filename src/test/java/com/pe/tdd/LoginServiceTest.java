@@ -6,36 +6,38 @@ import com.pe.tdd.exception.InvalidUserAndPasswordException;
 import com.pe.tdd.repository.UserRepository;
 import com.pe.tdd.repository.impl.FakeUserRepository;
 import com.pe.tdd.repository.impl.UserRepositoryImpl;
-import com.pe.tdd.service.LoginService;
+import com.pe.tdd.service.impl.LoginServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LoginServiceTest {
 
     UserRepository userRepository;
-    LoginService loginService;
+    LoginServiceImpl loginService;
 
-    User expectedUser = new User("user", "password", false);
+    User expectedUser = new User("user", "secret", false);
     User userWithWrongPassword = new User("user", "wrong password", false);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         userRepository = mock(UserRepositoryImpl.class);
-        loginService = new LoginService(userRepository);
+        loginService = new LoginServiceImpl(userRepository);
     }
 
     @Test
     public void shouldLoginWithUserAndPassword() {
+
         // Stub
         when(userRepository.findUser(Mockito.anyString()))
                 .thenReturn(expectedUser);
 
-        User loggedUser = loginService.login("user", "password");
+        User loggedUser = loginService.login("user", "secret");
 
         assertEquals(loggedUser, expectedUser);
     }
@@ -43,41 +45,49 @@ public class LoginServiceTest {
     @Test(expected = InvalidUserAndPasswordException.class)
     public void throwInvalidUserAndPasswordExceptionOnInvalidPassword() {
 
-
         // Stub
         when(userRepository.findUser(Mockito.anyString()))
                 .thenReturn(userWithWrongPassword);
 
-        LoginService loginService = new LoginService(userRepository);
+        LoginServiceImpl loginService = new LoginServiceImpl(userRepository);
         loginService.login("user", "wrong_password");
     }
 
     @Test(expected = BlockedUserException.class)
     public void throwBlockedUserExceptionOnBlockedUser() {
-        User blockedUser = new User("user", "password", true);
+        User blockedUser = new User("user", "secret", true);
 
         // Stub
         when(userRepository.findUser(Mockito.anyString()))
                 .thenReturn(blockedUser);
 
-        LoginService loginService = new LoginService(userRepository);
-        loginService.login("blocked_user", "password");
+        LoginServiceImpl loginService = new LoginServiceImpl(userRepository);
+        loginService.login("blocked_user", "secret");
     }
 
     @Test
     public void shouldLoginWithUserAndPasswordFake() {
         // Fake
         userRepository = new FakeUserRepository();
-        loginService = new LoginService(userRepository);
+        loginService = new LoginServiceImpl(userRepository);
 
-        loginService.login("user", "password");
+        loginService.login("user", "secret");
     }
 
     @Test
     public void shouldLoginWithUserAndPasswordMock() {
-        // Fake
-        LoginService mockLoginService = mock(LoginService.class);
-        mockLoginService.login("user", "password");
+        // Mock
+        LoginServiceImpl mockLoginService = mock(LoginServiceImpl.class);
+        mockLoginService.login("user", "secret");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void throwRuntimeExceptionOnAnyCase() {
+        LoginServiceImpl mockLoginService = mock(LoginServiceImpl.class);
+
+        when(mockLoginService.login(anyString(), anyString())).thenThrow(new RuntimeException());
+
+        mockLoginService.login("asdasd", "asdasd");
     }
 
 

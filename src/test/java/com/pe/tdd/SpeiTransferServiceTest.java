@@ -4,11 +4,11 @@ package com.pe.tdd;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.impl.AccountActivityRepository;
-import com.pe.tdd.repository.impl.AccountRepository;
-import com.pe.tdd.service.AccountActivityService;
-import com.pe.tdd.service.AccountService;
-import com.pe.tdd.service.SpeiTransferService;
+import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
+import com.pe.tdd.service.impl.AccountActivityServiceImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
+import com.pe.tdd.service.impl.SpeiTransferServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,24 +21,24 @@ import static org.mockito.Mockito.mock;
 
 public class SpeiTransferServiceTest {
 
-    private SpeiTransferService speiTransferService;
+    private SpeiTransferServiceImpl speiTransferService;
 
-    private AccountActivityRepository accountActivityRepository;
-    private AccountActivityService accountActivityService;
+    private AccountActivityRepositoryImpl accountActivityRepository;
+    private AccountActivityServiceImpl accountActivityService;
 
-    private AccountRepository accountRepository;
-    private AccountService accountService;
+    private AccountRepositoryImpl accountRepository;
+    private AccountServiceImpl accountService;
 
     @Before
     public void setUp() {
 
-        accountRepository = mock(AccountRepository.class);
-        accountService = new AccountService(accountRepository);
+        accountRepository = mock(AccountRepositoryImpl.class);
+        accountService = new AccountServiceImpl(accountRepository);
 
-        accountActivityRepository = mock(AccountActivityRepository.class);
-        accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
+        accountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        accountActivityService = new AccountActivityServiceImpl(accountActivityRepository, accountService);
 
-        speiTransferService = new SpeiTransferService(accountActivityService, accountService);
+        speiTransferService = new SpeiTransferServiceImpl(accountActivityService, accountService);
     }
 
     @Test

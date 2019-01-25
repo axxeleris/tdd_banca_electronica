@@ -5,13 +5,13 @@ import com.pe.tdd.domain.MobileCarrier;
 import com.pe.tdd.domain.MobileCarrierRecharge;
 import com.pe.tdd.domain.MobileCarrierRechargeBuyResponse;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.impl.AccountActivityRepository;
-import com.pe.tdd.repository.impl.AccountRepository;
-import com.pe.tdd.repository.impl.MobileCarrierRechargeRepository;
-import com.pe.tdd.repository.impl.MobileCarrierRepository;
-import com.pe.tdd.service.AccountActivityService;
-import com.pe.tdd.service.AccountService;
-import com.pe.tdd.service.MobileCarrierService;
+import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
+import com.pe.tdd.repository.impl.AccountRepositoryImpl;
+import com.pe.tdd.repository.impl.MobileCarrierRechargeRepositoryImpl;
+import com.pe.tdd.repository.impl.MobileCarrierRepositoryImpl;
+import com.pe.tdd.service.impl.AccountActivityServiceImpl;
+import com.pe.tdd.service.impl.AccountServiceImpl;
+import com.pe.tdd.service.impl.MobileCarrierServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,28 +26,28 @@ import static org.mockito.Mockito.when;
 
 public class MobileCarrierServiceTest {
 
-    private MobileCarrierService mobileCarrierService;
-    private MobileCarrierRepository mobileCarrierRepository;
-    private MobileCarrierRechargeRepository mobileCarrierRechargeRepository;
+    private MobileCarrierServiceImpl mobileCarrierService;
+    private MobileCarrierRepositoryImpl mobileCarrierRepository;
+    private MobileCarrierRechargeRepositoryImpl mobileCarrierRechargeRepository;
 
-    private AccountActivityRepository accountActivityRepository;
-    private AccountActivityService accountActivityService;
+    private AccountActivityRepositoryImpl accountActivityRepository;
+    private AccountActivityServiceImpl accountActivityService;
 
-    private AccountRepository accountRepository;
-    private AccountService accountService;
+    private AccountRepositoryImpl accountRepository;
+    private AccountServiceImpl accountService;
 
     @Before
     public void setUp() {
 
-        accountRepository = mock(AccountRepository.class);
-        accountService = new AccountService(accountRepository);
+        accountRepository = mock(AccountRepositoryImpl.class);
+        accountService = new AccountServiceImpl(accountRepository);
 
-        accountActivityRepository = mock(AccountActivityRepository.class);
-        accountActivityService = new AccountActivityService(accountActivityRepository, accountService);
+        accountActivityRepository = mock(AccountActivityRepositoryImpl.class);
+        accountActivityService = new AccountActivityServiceImpl(accountActivityRepository, accountService);
 
-        mobileCarrierRechargeRepository = mock(MobileCarrierRechargeRepository.class);
-        mobileCarrierRepository = mock(MobileCarrierRepository.class);
-        mobileCarrierService = new MobileCarrierService(
+        mobileCarrierRechargeRepository = mock(MobileCarrierRechargeRepositoryImpl.class);
+        mobileCarrierRepository = mock(MobileCarrierRepositoryImpl.class);
+        mobileCarrierService = new MobileCarrierServiceImpl(
                 mobileCarrierRepository,
                 mobileCarrierRechargeRepository,
                 accountActivityService,
