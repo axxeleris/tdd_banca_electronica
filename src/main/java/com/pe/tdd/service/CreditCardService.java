@@ -2,9 +2,7 @@ package com.pe.tdd.service;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.CreditCardPaymentResponse;
-import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.CreditCardRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

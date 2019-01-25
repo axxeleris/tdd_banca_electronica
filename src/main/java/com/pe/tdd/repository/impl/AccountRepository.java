@@ -1,4 +1,4 @@
-package com.pe.tdd.repository;
+package com.pe.tdd.repository.impl;
 
 import com.pe.tdd.domain.Account;
 

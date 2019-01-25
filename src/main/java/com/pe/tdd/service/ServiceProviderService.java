@@ -4,7 +4,7 @@ import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.ServiceProvider;
 import com.pe.tdd.domain.ServiceProviderPaymentResponse;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.ServiceProviderRepository;
+import com.pe.tdd.repository.impl.ServiceProviderRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

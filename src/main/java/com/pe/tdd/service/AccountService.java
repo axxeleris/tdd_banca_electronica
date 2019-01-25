@@ -2,7 +2,7 @@ package com.pe.tdd.service;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.ChangeAccountNipResponse;
-import com.pe.tdd.repository.AccountRepository;
+import com.pe.tdd.repository.impl.AccountRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

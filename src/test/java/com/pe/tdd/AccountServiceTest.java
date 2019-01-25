@@ -1,7 +1,7 @@
 package com.pe.tdd;
 
 import com.pe.tdd.domain.Account;
-import com.pe.tdd.repository.AccountRepository;
+import com.pe.tdd.repository.impl.AccountRepository;
 import com.pe.tdd.service.AccountService;
 import org.junit.Before;
 import org.junit.Test;

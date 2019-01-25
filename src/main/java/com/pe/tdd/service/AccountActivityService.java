@@ -8,7 +8,7 @@ import com.pe.tdd.domain.ServiceProviderPaymentResponse;
 import com.pe.tdd.domain.SpeiTransfer;
 import com.pe.tdd.domain.TefTransfer;
 import com.pe.tdd.exception.InvalidAccountException;
-import com.pe.tdd.repository.AccountActivityRepository;
+import com.pe.tdd.repository.impl.AccountActivityRepository;
 
 import java.util.List;
 

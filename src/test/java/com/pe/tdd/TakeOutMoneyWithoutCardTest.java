@@ -3,7 +3,7 @@ package com.pe.tdd;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.TakeOutMoneyWithoutCard;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.TakeOutMoneyWithoutCardRepository;
+import com.pe.tdd.repository.impl.TakeOutMoneyWithoutCardRepository;
 import com.pe.tdd.service.TakeOutMoneyWithoutCardService;
 import org.junit.Before;
 import org.junit.Test;

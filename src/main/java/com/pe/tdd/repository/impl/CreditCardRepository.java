@@ -1,4 +1,4 @@
-package com.pe.tdd.repository;
+package com.pe.tdd.repository.impl;
 
 public class CreditCardRepository {
 }

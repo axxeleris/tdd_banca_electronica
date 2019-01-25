@@ -3,7 +3,7 @@ package com.pe.tdd.service;
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.TakeOutMoneyWithoutCard;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.TakeOutMoneyWithoutCardRepository;
+import com.pe.tdd.repository.impl.TakeOutMoneyWithoutCardRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;

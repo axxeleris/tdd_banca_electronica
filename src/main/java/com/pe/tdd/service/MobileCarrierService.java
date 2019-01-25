@@ -5,8 +5,8 @@ import com.pe.tdd.domain.MobileCarrier;
 import com.pe.tdd.domain.MobileCarrierRecharge;
 import com.pe.tdd.domain.MobileCarrierRechargeBuyResponse;
 import com.pe.tdd.exception.InsufficientBalanceException;
-import com.pe.tdd.repository.MobileCarrierRechargeRepository;
-import com.pe.tdd.repository.MobileCarrierRepository;
+import com.pe.tdd.repository.impl.MobileCarrierRechargeRepository;
+import com.pe.tdd.repository.impl.MobileCarrierRepository;
 
 import java.time.LocalDate;
 import java.util.List;
