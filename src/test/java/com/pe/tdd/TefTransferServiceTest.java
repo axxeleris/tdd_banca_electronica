@@ -61,51 +61,6 @@ public class TefTransferServiceTest {
         assertTrue(expectedBalance.compareTo(originAccount.getBalance()) == 0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNullOriginAccount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
-                null,
-                "7894564",
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNullAccountNumber() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                null,
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnEmptyAccountNumber() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "",
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNegativeAmount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "879465",
-                BigDecimal.valueOf(-500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnHigherMaxAmount() {
-        TefTransfer tefTransfer = tefTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "879465",
-                BigDecimal.valueOf(5001)
-        );
-    }
-
     @Test(expected = InsufficientBalanceException.class)
     public void throwInsufficientBalanceExceptionOnAmountHigherThanAccountBalance() {
         TefTransfer tefTransfer = tefTransferService.transfer(
