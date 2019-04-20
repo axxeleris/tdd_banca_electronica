@@ -48,24 +48,6 @@ public class NipServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void throwIlegalExceptionOnChangeNipWithInvalidNewNipLength() {
-        String accountNumber = "1234567890";
-        String newNip = "12";
-        String actualNip = "4321";
-
-        accountService.changeNip(newNip, actualNip, accountNumber);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIlegalExceptionOnChangeNipWithInvalidActualNip() {
-        String accountNumber = "1234567890";
-        String newNip = "1234";
-        String actualNip = null;
-
-        accountService.changeNip(newNip, actualNip, accountNumber);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void throwIlegalExceptionOnChangeNipWithActualNipDoesntMatch() {
         String accountNumber = "1234567890";
         String newNip = "1234";
