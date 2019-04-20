@@ -2,10 +2,8 @@ package com.pe.tdd;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.AccountActivity;
-import com.pe.tdd.exception.InvalidAccountException;
 import com.pe.tdd.repository.AccountActivityRepository;
 import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
-import com.pe.tdd.repository.impl.AccountRepositoryImpl;
 import com.pe.tdd.service.AccountActivityService;
 import com.pe.tdd.service.AccountService;
 import com.pe.tdd.service.impl.AccountActivityServiceImpl;
@@ -44,19 +42,6 @@ public class AccountActivityTest {
         List<AccountActivity> accountActivities = accountActivityService.findActivitiesByAccount(987456L, "user");
 
         assertTrue(accountActivities.size() > 0);
-    }
-
-    @Test(expected = InvalidAccountException.class)
-    public void throwInvalidAccountExceptionOnInvalidAccountNumber() {
-        AccountActivityRepositoryImpl mockAccountActivityRepository = mock(AccountActivityRepositoryImpl.class);
-        AccountRepositoryImpl mockAccountRepository = mock(AccountRepositoryImpl.class);
-
-        AccountServiceImpl accountService = new AccountServiceImpl(mockAccountRepository);
-        AccountActivityServiceImpl accountActivityService = new AccountActivityServiceImpl(mockAccountActivityRepository, accountService);
-
-        when(mockAccountRepository.findAccountByAccountNumberAndUserName(anyLong(), anyString())).thenReturn(null);
-
-        accountActivityService.findActivitiesByAccount(987456L, "user");
     }
 
 }
