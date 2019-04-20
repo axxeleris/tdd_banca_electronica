@@ -48,11 +48,5 @@ public class AccountServiceTest {
         );
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnUpdateBalanceWithNullAccount() {
-        accountService.updateBalance(
-                BigDecimal.valueOf(1),
-                null
-        );
-    }
+
 }
