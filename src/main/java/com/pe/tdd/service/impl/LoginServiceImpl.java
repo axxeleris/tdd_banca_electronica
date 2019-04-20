@@ -1,7 +1,6 @@
 package com.pe.tdd.service.impl;
 
 import com.pe.tdd.domain.User;
-import com.pe.tdd.exception.InvalidUserAndPasswordException;
 import com.pe.tdd.repository.UserRepository;
 import com.pe.tdd.service.LoginService;
 
@@ -19,7 +18,7 @@ public class LoginServiceImpl implements LoginService {
         if ("secret".equals(password)) {
             return foundUser;
         } else {
-            throw new InvalidUserAndPasswordException();
+            return null;
         }
     }
 
