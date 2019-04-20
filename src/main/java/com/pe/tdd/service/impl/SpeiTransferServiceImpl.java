@@ -2,7 +2,6 @@ package com.pe.tdd.service.impl;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.SpeiTransfer;
-import com.pe.tdd.exception.InsufficientBalanceException;
 import com.pe.tdd.service.AccountActivityService;
 import com.pe.tdd.service.AccountService;
 import com.pe.tdd.service.SpeiTransferService;
@@ -35,10 +34,6 @@ public class SpeiTransferServiceImpl implements SpeiTransferService {
             throw new IllegalArgumentException("El monto debe ser mayor a $0.00 Pesos");
         } else if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
             throw new IllegalArgumentException("El monto no debe superar los $5000.00 Pesos");
-        }
-
-        if (originAccount.getBalance().compareTo(amount) < 0) {
-            throw new InsufficientBalanceException();
         }
 
         SpeiTransfer result = new SpeiTransfer(
