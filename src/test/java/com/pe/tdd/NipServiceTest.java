@@ -47,19 +47,5 @@ public class NipServiceTest {
         accountService.changeNip(newNip, actualNip, accountNumber);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIlegalExceptionOnChangeNipWithActualNipDoesntMatch() {
-        String accountNumber = "1234567890";
-        String newNip = "1234";
-        String actualNip = "4321";
-
-        Account account = new Account(accountNumber, "Debit", BigDecimal.valueOf(1000));
-        account.setNip("9876");
-
-        when(accountRepository.findByAccountNumber(anyString()))
-                .thenReturn(account);
-
-        accountService.changeNip(newNip, actualNip, accountNumber);
-    }
 
 }
