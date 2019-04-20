@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -38,21 +39,11 @@ public class AccountServiceTest {
         List<Account> accountsList = accountService.getAccounts("usuario");
 
         assertTrue(accountsList.size() > 0);
+        accountsList.forEach(i -> {
+            assertNotNull(i.getAccountNumber());
+            assertNotNull(i.getDescription());
+            assertNotNull(i.getBalance());
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnUpdateBalanceWithNullAmount() {
-        accountService.updateBalance(
-                null,
-                new Account("1234", "Debit 01", BigDecimal.valueOf(1000))
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnUpdateBalanceWithNullAccount() {
-        accountService.updateBalance(
-                BigDecimal.valueOf(1),
-                null
-        );
-    }
 }
