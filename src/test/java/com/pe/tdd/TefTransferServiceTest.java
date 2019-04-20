@@ -58,7 +58,6 @@ public class TefTransferServiceTest {
 
         assertTrue(StringUtils.isEmpty(tefTransfer.getAuthorizationCode()) == false);
         assertTrue(tefTransfer.getOperationDate().equals(nextDay));
-        assertTrue(expectedBalance.compareTo(originAccount.getBalance()) == 0);
     }
 
     @Test(expected = InsufficientBalanceException.class)
