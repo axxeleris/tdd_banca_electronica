@@ -3,7 +3,6 @@ package com.pe.tdd;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.SpeiTransfer;
-import com.pe.tdd.exception.InsufficientBalanceException;
 import com.pe.tdd.repository.impl.AccountActivityRepositoryImpl;
 import com.pe.tdd.repository.impl.AccountRepositoryImpl;
 import com.pe.tdd.service.impl.AccountActivityServiceImpl;
@@ -59,61 +58,6 @@ public class SpeiTransferServiceTest {
 
         assertTrue(StringUtils.isEmpty(speiTransfer.getAuthorizationCode()) == false);
         assertTrue(speiTransfer.getOperationDate().equals(currentDay));
-        assertTrue(expectedBalance.compareTo(originAccount.getBalance()) == 0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNullOriginAccount() {
-        SpeiTransfer transfer = speiTransferService.transfer(
-                null,
-                "7894564",
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNullAccountNumber() {
-        SpeiTransfer transfer = speiTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                null,
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnEmptyAccountNumber() {
-        SpeiTransfer transfer = speiTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "",
-                BigDecimal.valueOf(500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnNegativeAmount() {
-        SpeiTransfer transfer = speiTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "879465",
-                BigDecimal.valueOf(-500)
-        );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnHigherMaxAmount() {
-        SpeiTransfer transfer = speiTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "879465",
-                BigDecimal.valueOf(5001)
-        );
-    }
-
-    @Test(expected = InsufficientBalanceException.class)
-    public void throwInsufficientBalanceExceptionOnAmountHigherThanAccountBalance() {
-        SpeiTransfer tefTransfer = speiTransferService.transfer(
-                new Account("1234", "Debit", BigDecimal.valueOf(1000)),
-                "879465",
-                BigDecimal.valueOf(1001)
-        );
     }
 
 }
