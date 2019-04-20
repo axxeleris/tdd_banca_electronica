@@ -2,7 +2,6 @@ package com.pe.tdd.service.impl;
 
 import com.pe.tdd.domain.Account;
 import com.pe.tdd.domain.TefTransfer;
-import com.pe.tdd.exception.InsufficientBalanceException;
 import com.pe.tdd.service.AccountActivityService;
 import com.pe.tdd.service.AccountService;
 import com.pe.tdd.service.TefTransferService;
@@ -29,16 +28,6 @@ public class TefTransferServiceImpl implements TefTransferService {
         }
         if (StringUtils.isEmpty(accountNumber)) {
             throw new IllegalArgumentException("accountNumber");
-        }
-
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("El monto debe ser mayor a $0.00 Pesos");
-        } else if (amount.compareTo(BigDecimal.valueOf(5000)) > 0) {
-            throw new IllegalArgumentException("El monto no debe superar los $5000.00 Pesos");
-        }
-
-        if (originAccount.getBalance().compareTo(amount) < 0) {
-            throw new InsufficientBalanceException();
         }
 
         TefTransfer result = new TefTransfer(
