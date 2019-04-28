@@ -38,7 +38,10 @@ public class AccountActivityTest {
         );
         Account expectedAccount = new Account("1234", "Debit 01", BigDecimal.valueOf(5000));
 
+        // Stub
         when(mockAccountActivityRepository.findActivitiesByAccount(anyLong())).thenReturn(expectedAccountActivityList);
+
+        // Stub
         when(mockAccountService.findAccount(anyLong(), anyString())).thenReturn(expectedAccount);
 
         List<AccountActivity> accountActivities = accountActivityService.findActivitiesByAccount(987456L, "user");
@@ -54,6 +57,7 @@ public class AccountActivityTest {
         AccountServiceImpl accountService = new AccountServiceImpl(mockAccountRepository);
         AccountActivityServiceImpl accountActivityService = new AccountActivityServiceImpl(mockAccountActivityRepository, accountService);
 
+        // Stub
         when(mockAccountRepository.findAccountByAccountNumberAndUserName(anyLong(), anyString())).thenReturn(null);
 
         accountActivityService.findActivitiesByAccount(987456L, "user");
