@@ -34,9 +34,13 @@ public class AccountActivityTest {
                 new AccountActivity(456L, "Venta 02", BigDecimal.valueOf(550), "456"),
                 new AccountActivity(789L, "Deposito", BigDecimal.valueOf(8000), "789")
         );
+
         Account expectedAccount = new Account("1234", "Debit 01", BigDecimal.valueOf(5000));
 
+        // Stub
         when(mockAccountActivityRepository.findActivitiesByAccount(anyLong())).thenReturn(expectedAccountActivityList);
+
+        // Stub
         when(mockAccountService.findAccount(anyLong(), anyString())).thenReturn(expectedAccount);
 
         List<AccountActivity> accountActivities = accountActivityService.findActivitiesByAccount(987456L, "user");
