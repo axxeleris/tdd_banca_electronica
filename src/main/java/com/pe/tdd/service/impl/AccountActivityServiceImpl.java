@@ -39,11 +39,6 @@ public class AccountActivityServiceImpl implements AccountActivityService {
         accountActivity.setAuthorizationCode(tefTransfer.getAuthorizationCode());
         accountActivity.setId(1L);
 
-        accountService.updateBalance(
-                accountActivity.getAmount().negate(),
-                account
-        );
-
         return accountActivityRepository.save(accountActivity);
     }
 

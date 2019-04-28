@@ -40,13 +40,5 @@ public class AccountServiceTest {
         assertTrue(accountsList.size() > 0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwIllegalArgumentExceptionOnUpdateBalanceWithNullAmount() {
-        accountService.updateBalance(
-                null,
-                new Account("1234", "Debit 01", BigDecimal.valueOf(1000))
-        );
-    }
-
 
 }
