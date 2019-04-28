@@ -44,7 +44,6 @@ public class SpeiTransferServiceTest {
     public void shouldDoTransfer() {
         BigDecimal initialBalance = BigDecimal.valueOf(1000);
         BigDecimal serviceAmount = BigDecimal.valueOf(150);
-        BigDecimal expectedBalance = initialBalance.subtract(serviceAmount);
 
         Account originAccount = new Account("1234", "Debit", initialBalance);
 
