@@ -32,6 +32,7 @@ public class NipServiceTest {
         Account account = new Account(accountNumber, "Debit", BigDecimal.valueOf(1000));
         account.setNip(actualNip);
 
+        // Stub
         when(accountRepository.findByAccountNumber(anyString()))
                 .thenReturn(account);
 
