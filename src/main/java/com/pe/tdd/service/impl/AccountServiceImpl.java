@@ -28,22 +28,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account updateBalance(BigDecimal amount, Account account) {
-        if (account == null) {
-            throw new IllegalArgumentException("La cuenta es requerida");
-        }
-        if (amount == null) {
-            throw new IllegalArgumentException("El monto es requerido");
-        }
-
-        account.setBalance(
-                account.getBalance().add(amount)
-        );
-
-        return accountRepository.save(account);
-    }
-
-    @Override
     public ChangeAccountNipResponse changeNip(String newNip, String actualNip, String accountNumber) {
         if (StringUtils.isEmpty(newNip)) {
             throw new IllegalArgumentException("El nuevo nip es requerido");
