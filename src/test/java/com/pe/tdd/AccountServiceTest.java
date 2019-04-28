@@ -33,6 +33,7 @@ public class AccountServiceTest {
                 new Account("5678", "Credit 02", BigDecimal.valueOf(5000))
         );
 
+        // Stub
         when(accountRepository.findAccountsByUserName(anyString())).thenReturn(expectedAccountList);
 
         List<Account> accountsList = accountService.getAccounts("usuario");
